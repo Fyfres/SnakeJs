@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+<body style="height:100vh">
+<table>
+</table>
+
+<label class="mt-5" for="difficulty">Choix de la difficulté</label>
+<select name="difficulty" id="difficulty">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+<button class="btn btn-danger" onclick="Board.initBoard()">Démarrer le jeu</button>
+</body>
+<script src="src/classes/Utility.js"></script>
+<script src="src/classes/Objects.js"></script>
+<script src="src/classes/Body.js"></script>
+<script src="src/classes/Boost.js"></script>
+<script src="src/classes/RecoltObject.js"></script>
+<script src="src/classes/AbstractSnake.js"></script>
+<script src="src/classes/Board.js"></script>
+</html>

@@ -1,0 +1,3 @@
+class Boost extends Objects {
+
+}

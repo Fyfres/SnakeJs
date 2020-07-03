@@ -1,0 +1,25 @@
+.apple {
+    color : red;
+}
+
+.boost {
+    color : green;
+}
+
+.empty {
+    background-color: #000000;
+}
+
+td {
+    border : 2px solid white;
+    width : 3vw;
+    height : 5vh;
+}
+
+table {
+    background-color: #111111;
+}
+
+body {
+     background-color: grey;
+}
