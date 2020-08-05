@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+<body style="height:100vh">
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-12 col-md-6">
+                <table>
+                </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <label class="mt-5" for="difficulty">Choix de la difficulté</label>
+                <select name="difficulty" id="difficulty">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <button class="btn btn-danger" onclick="Board.initBoard()">Démarrer le jeu</button>
+
+                <div class="w-75  bg-primary border border-dark rounded mt-4">
+                    <div class="row">
+                        <h3 class="col-8 mt-3">Nombre de parties joué:</h3><span id="gamePlayed" class="col-4 mt-4"></span>
+                        <h3 class="col-8 mt-3">Nombre de parties gagné:</h3><span id="gameWin" class="col-4 mt-4"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modalGameEnd" tabindex="-1" role="dialog" aria-labelledby="EndOfTheGameModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDesc"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="src/classes/Utility.js"></script>
+    <script src="src/classes/Objects.js"></script>
+    <script src="src/classes/Body.js"></script>
+    <script src="src/classes/Boost.js"></script>
+    <script src="src/classes/PlayerStatus.js"></script>
+    <script src="src/classes/RecoltObject.js"></script>
+    <script src="src/classes/AbstractSnake.js"></script>
+    <script src="src/classes/Board.js"></script>
+    <script>PlayerStatus.initPage()</script>
+</body>
+</html>

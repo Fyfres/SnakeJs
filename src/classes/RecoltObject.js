@@ -1,5 +1,5 @@
 class RecoltObject extends Objects {
-    constructor(property, status, visual) {
-        super(property, status, visual);
+    constructor(property, status) {
+        super(property, status, "Apple");
     }
 }
