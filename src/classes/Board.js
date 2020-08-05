@@ -29,7 +29,7 @@ class Board {
             Board.initBoard(Board.lvl);
             return;
         }
-        AbstractSnake.init();
+        Snake.init();
     }
 
 

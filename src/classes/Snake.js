@@ -1,18 +1,18 @@
-class AbstractSnake {
+class Snake {
     static bodyQts = 0;
     static bodies = [];
     static snakeDirection = "right";
 
     static init() {
-        AbstractSnake.bodies = [];
-        AbstractSnake.bodies.push(new Body("SnakeHead", true, "SnakeHead", true));
+        Snake.bodies = [];
+        Snake.bodies.push(new Body("SnakeHead", true, "SnakeHead", true));
         let tempEvent = (e) => {
             if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "ArrowDown") {
-                    AbstractSnake.step();
+                    Snake.step();
                 window.removeEventListener("keydown", tempEvent);
             }
         };
-        AbstractSnake.direction();
+        Snake.direction();
         window.removeEventListener("keydown", tempEvent);
         window.addEventListener("keydown", tempEvent);
     }
@@ -20,13 +20,13 @@ class AbstractSnake {
     static direction() {
         let tempEvent = (e) => {
             if (e.key === "ArrowRight") {
-                AbstractSnake.snakeDirection = "right";
+                Snake.snakeDirection = "right";
             } else if (e.key === "ArrowLeft") {
-                AbstractSnake.snakeDirection = "left";
+                Snake.snakeDirection = "left";
             } else if (e.key === "ArrowUp") {
-                AbstractSnake.snakeDirection = "up";
+                Snake.snakeDirection = "up";
             } else if (e.key === "ArrowDown") {
-                AbstractSnake.snakeDirection = "down";
+                Snake.snakeDirection = "down";
             }
         };
         window.removeEventListener("keydown", tempEvent);
@@ -35,58 +35,58 @@ class AbstractSnake {
 
     static step(){
 
-        let pos = AbstractSnake.bodies[0].partPos;
-        AbstractSnake.bodies[0].lastPos = AbstractSnake.bodies[0].partPos;
-        if (AbstractSnake.snakeDirection === "right") {
+        let pos = Snake.bodies[0].partPos;
+        Snake.bodies[0].lastPos = Snake.bodies[0].partPos;
+        if (Snake.snakeDirection === "right") {
             if (Board.board[pos[0]] != undefined && Board.board[pos[0]][pos[1] + 1] != undefined && !(Board.board[pos[0]][pos[1] + 1] instanceof Body)) {
-                AbstractSnake.bodies[0].partPos = [pos[0], pos[1] + 1];
+                Snake.bodies[0].partPos = [pos[0], pos[1] + 1];
             } else {
                 PlayerStatus.lose();
                 return
             }
-        } else if (AbstractSnake.snakeDirection === "left") {
+        } else if (Snake.snakeDirection === "left") {
             if (Board.board[pos[0]] != undefined && Board.board[pos[0]][pos[1] - 1] != undefined && !(Board.board[pos[0]][pos[1] - 1] instanceof Body)) {
-                AbstractSnake.bodies[0].partPos = [pos[0], pos[1] - 1];
+                Snake.bodies[0].partPos = [pos[0], pos[1] - 1];
             } else {
                 PlayerStatus.lose();
                 return
             }
-        } else if (AbstractSnake.snakeDirection === "up") {
+        } else if (Snake.snakeDirection === "up") {
             if (Board.board[pos[0] - 1] != undefined && Board.board[pos[0] - 1][pos[1]] != undefined && !(Board.board[pos[0] - 1][pos[1]] instanceof Body)) {
-                AbstractSnake.bodies[0].partPos = [pos[0] - 1, pos[1]];
+                Snake.bodies[0].partPos = [pos[0] - 1, pos[1]];
             } else {
                 PlayerStatus.lose();
                 return
             }
-        } else if (AbstractSnake.snakeDirection === "down") {
+        } else if (Snake.snakeDirection === "down") {
             if (Board.board[pos[0] + 1] != undefined && Board.board[pos[0] + 1][pos[1]] != undefined && !(Board.board[pos[0] + 1][pos[1]] instanceof Body)) {
-                AbstractSnake.bodies[0].partPos = [pos[0] + 1, pos[1]];
+                Snake.bodies[0].partPos = [pos[0] + 1, pos[1]];
             } else {
                 PlayerStatus.lose();
                 return
             }
         } else {
-            console.error("Error while reading direction of the Snake.\nCurrent direction : \"" + AbstractSnake.snakeDirection + "\".");
+            console.error("Error while reading direction of the Snake.\nCurrent direction : \"" + Snake.snakeDirection + "\".");
             Board.initBoard();
             return;
         }
-        let newPos = Board.board[AbstractSnake.bodies[0].partPos[0]][AbstractSnake.bodies[0].partPos[1]];
+        let newPos = Board.board[Snake.bodies[0].partPos[0]][Snake.bodies[0].partPos[1]];
         if (newPos.property === "lootable") {
             if (newPos instanceof RecoltObject) {
                 console.log(newPos);
-                Board.emptyACase(AbstractSnake.bodies[0].partPos);
+                Board.emptyACase(Snake.bodies[0].partPos);
                 let body = new Body("SnakeBody", true, "SnakeBody", false);
-                AbstractSnake.bodies.push(body);
-                AbstractSnake.bodyQts++;
+                Snake.bodies.push(body);
+                Snake.bodyQts++;
                 PlayerStatus.currentRecoltedAppleCount++;
-                Board.changeACaseContent(AbstractSnake.bodies[AbstractSnake.bodies.length-1].partPos, AbstractSnake.bodies[AbstractSnake.bodies.length-1]);
+                Board.changeACaseContent(Snake.bodies[Snake.bodies.length-1].partPos, Snake.bodies[Snake.bodies.length-1]);
                 if(PlayerStatus.testWin()) {
                     return;
                 }
             } else if (newPos instanceof Boost) {
-                if (AbstractSnake.bodies.length > 1) {
-                    Board.emptyACase(AbstractSnake.bodies[AbstractSnake.bodies.length-1].partPos);
-                    AbstractSnake.bodies.pop();
+                if (Snake.bodies.length > 1) {
+                    Board.emptyACase(Snake.bodies[Snake.bodies.length-1].partPos);
+                    Snake.bodies.pop();
                 }
                 PlayerStatus.currentRecoltedBonusCount++;
             } else {
@@ -102,7 +102,7 @@ class AbstractSnake {
         }
         Body.moveWholeBody();
         setTimeout(()=>{
-            AbstractSnake.step();
+            Snake.step();
         },800)
     }
 }

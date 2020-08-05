@@ -2,6 +2,7 @@ class PlayerStatus {
     static currentGameStatus = "unknown";
     static gamesPlayed = 0;
     static winnedGames = 0;
+    static winstreak = 0;
     static currentRecoltedBonusCount = 0;
     static currentRecoltedAppleCount = 0;
     static currentGameTotalApple = 0;
