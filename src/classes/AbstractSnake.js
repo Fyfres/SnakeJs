@@ -1,26 +1,24 @@
 class AbstractSnake {
     static bodyQts = 0;
     static bodies = [];
-    static status = false;
     static snakeDirection = "right";
 
     static init() {
         AbstractSnake.bodies = [];
         AbstractSnake.bodies.push(new Body("SnakeHead", true, "SnakeHead", true));
-        AbstractSnake.direction();
         let tempEvent = (e) => {
             if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "ArrowDown") {
-                AbstractSnake.step();
+                    AbstractSnake.step();
                 window.removeEventListener("keydown", tempEvent);
             }
         };
+        AbstractSnake.direction();
         window.removeEventListener("keydown", tempEvent);
         window.addEventListener("keydown", tempEvent);
-        AbstractSnake.direction();
     }
 
     static direction() {
-        window.addEventListener("keydown", (e) => {
+        let tempEvent = (e) => {
             if (e.key === "ArrowRight") {
                 AbstractSnake.snakeDirection = "right";
             } else if (e.key === "ArrowLeft") {
@@ -30,7 +28,9 @@ class AbstractSnake {
             } else if (e.key === "ArrowDown") {
                 AbstractSnake.snakeDirection = "down";
             }
-        })
+        };
+        window.removeEventListener("keydown", tempEvent);
+        window.addEventListener("keydown", tempEvent)
     }
 
     static step(){

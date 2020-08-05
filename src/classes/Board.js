@@ -4,6 +4,7 @@ class Board {
 
     //Launch or Relaunch the board with the choosed difficulty
     static initBoard() {
+        document.querySelector("#gameStarter").setAttribute("disabled", "");
         PlayerStatus.resetForNewGame();
         PlayerStatus.initPage();
         Board.board = [];
@@ -24,7 +25,7 @@ class Board {
             }
         }
         // If by any chance there is no apple on the board relaunch the Board initialization
-        if(PlayerStatus.currentGameTotalApple < 1) {
+        if(PlayerStatus.currentGameTotalApple < Board.lvl) {
             Board.initBoard(Board.lvl);
             return;
         }
@@ -55,6 +56,14 @@ class Board {
     // Change the value of a case in the board to empty
     static emptyACase(pos) {
         Board.changeACaseContent(pos, new Objects("", false, "empty"));
+    }
+
+    static emptyAllBoard() {
+        for (let i = 0; i < Board.board.length; i++) {
+            for (let j = 0; j < Board.board[i].length; j++) {
+                Board.emptyACase([i,j]);
+            }
+        }
     }
 
     // Change the value of a case in the board

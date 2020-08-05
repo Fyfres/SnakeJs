@@ -37,7 +37,8 @@ class PlayerStatus {
             PlayerStatus.winnedGames++;
             PlayerStatus.setCurrentGameStatus("win");
             PlayerStatus.openModal();
-            Board.initBoard();
+            Board.emptyAllBoard();
+            document.querySelector("#gameStarter").removeAttribute("disabled");
             return true;
         }
     }
@@ -47,7 +48,8 @@ class PlayerStatus {
         PlayerStatus.gamesPlayed++;
         PlayerStatus.setCurrentGameStatus("lose");
         PlayerStatus.openModal();
-        Board.initBoard();
+        Board.emptyAllBoard();
+        document.querySelector("#gameStarter").removeAttribute("disabled");
     }
 
 
