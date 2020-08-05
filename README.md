@@ -10,6 +10,8 @@ This is a Snake that i'm trying to do the most quickly possible
 4/ Open the folder you just extracted.  
 5/ Open the game with the file "Snake.html".  
 
+I'll create a proper download link when the game will be totally finished.
+
 
 ### Time on it
 
