@@ -3,6 +3,7 @@ class PlayerStatus {
     static gamesPlayed = 0;
     static winnedGames = 0;
     static winstreak = 0;
+    static bestWinStreak = 0;
     static currentRecoltedBonusCount = 0;
     static currentRecoltedAppleCount = 0;
     static currentGameTotalApple = 0;
@@ -13,6 +14,8 @@ class PlayerStatus {
     static initPage() {
         Utility.changeInnerHtml("#gamePlayed", PlayerStatus.gamesPlayed);
         Utility.changeInnerHtml("#gameWin", PlayerStatus.winnedGames);
+        Utility.changeInnerHtml("#winStreak", PlayerStatus.winstreak);
+        Utility.changeInnerHtml("#winStreakMax", PlayerStatus.bestWinStreak);
     }
 
     static setCurrentGameStatus(status) {
@@ -36,8 +39,11 @@ class PlayerStatus {
         if (PlayerStatus.currentRecoltedAppleCount >= PlayerStatus.currentGameTotalApple) {
             PlayerStatus.gamesPlayed++;
             PlayerStatus.winnedGames++;
+            PlayerStatus.winstreak++;
+            PlayerStatus.bestWinStreak = PlayerStatus.winstreak > PlayerStatus.bestWinStreak ? PlayerStatus.winstreak : PlayerStatus.bestWinStreak;
             PlayerStatus.setCurrentGameStatus("win");
             PlayerStatus.openModal();
+            PlayerStatus.initPage();
             Board.emptyAllBoard();
             document.querySelector("#gameStarter").removeAttribute("disabled");
             return true;
@@ -47,8 +53,10 @@ class PlayerStatus {
     // Test if the game is lost add the stats, open the modal and reset the Board
     static lose() {
         PlayerStatus.gamesPlayed++;
+        PlayerStatus.winstreak = 0;
         PlayerStatus.setCurrentGameStatus("lose");
         PlayerStatus.openModal();
+        PlayerStatus.initPage();
         Board.emptyAllBoard();
         document.querySelector("#gameStarter").removeAttribute("disabled");
     }

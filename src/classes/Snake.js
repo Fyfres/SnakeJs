@@ -103,7 +103,7 @@ class Snake {
         Body.moveWholeBody();
         setTimeout(()=>{
             Snake.step();
-        },800)
+        },500 - (PlayerStatus.winstreak > 24 ? 24 * 20 : PlayerStatus.winstreak * 20))
     }
 }
 
