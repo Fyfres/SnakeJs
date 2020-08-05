@@ -2,6 +2,15 @@
 
 This is a Snake that i'm trying to do the most quickly possible
 
+### How to play
+
+1/ Click on the "code button".  
+2/ Click on "Download ZIP".  
+3/ Extract the ZIP wherever you want on your computer with winrara or 7zip.  
+4/ Open the folder you just extracted.  
+5/ Open the game with the file "Snake.html".  
+
+
 ### Time on it
 
 Actually i've worked on it for 11h for the base game to be done  
