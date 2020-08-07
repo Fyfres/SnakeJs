@@ -20,7 +20,7 @@ Actually i've worked on it for 12h for the base game to be done
   - Loosing when touching the walls or the snake body  
   - Winning when recolting every apples on the standard mode  
   - Length of the snake grow when getting an apple and shrink when getting a boost  
-  - Speed increase: When on a win streal for Normale mode or with every recolted apple for the Unlimited mode  
+  - Speed increase: When on a win streak for Normal mode or with every recolted apple for the Unlimited mode  
   - Replay showing the last game played with the speed corresponding  
 
 ### Features to come
