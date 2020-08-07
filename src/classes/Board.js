@@ -2,9 +2,12 @@ class Board {
     static board = [];
     static lvl = 1;
 
+    static canceled = [];
+
     //Launch or Relaunch the board with the choosed difficulty
     static initBoard() {
         document.querySelector("#gameStarter").setAttribute("disabled", "");
+        document.querySelector("#gameStarter2").setAttribute("disabled", "");
         PlayerStatus.resetForNewGame();
         PlayerStatus.initPage();
         Board.board = [];
@@ -29,6 +32,33 @@ class Board {
             Board.initBoard(Board.lvl);
             return;
         }
+        Snake.init();
+    }
+
+    static initBoardInfinite() {
+        document.querySelector("#gameStarter").setAttribute("disabled", "");
+        document.querySelector("#gameStarter2").setAttribute("disabled", "");
+        PlayerStatus.resetForNewGame();
+        PlayerStatus.initPage();
+        Board.board = [];
+
+        // Initializing 2D Array
+        for (let i = 0; i < 10; i++) {
+            Board.board.push([]);
+        }
+        // Reinitialize the Board
+        document.getElementsByTagName("table")[0].innerHTML = "<tbody></tbody>";
+        for (let i = 0; i < 10; i++) {
+            // Create a new row
+            document.getElementsByTagName("tbody")[0].innerHTML = document.getElementsByTagName("tbody")[0].innerHTML + "<tr id='r"+i+"'></tr>";
+            for (let j = 0; j < 10; j++) {
+                Board.board[i][j] = new Objects("", false, "empty");
+                document.getElementById("r"+i).innerHTML = document.getElementById("r"+i).innerHTML + "<td id='r"+ i + "l" + j + "' >" + (Board.board[i][j].visual != "empty" ? "<img src='src/img/" + Board.board[i][j].visual + ".png' class='w-100'></img>" : "") + "</td>";
+            }
+        }
+
+        Board.InfiniteAddApple();
+
         Snake.init();
     }
 
@@ -68,7 +98,38 @@ class Board {
 
     // Change the value of a case in the board
     static changeACaseContent(pos,object) {
+        if(pos[0] > 9 || pos[1] > 9) {
+            console.error("An error occurred while changing the content of a case the given position were off the Board. \n" + pos);
+        }
         Board.board[pos[0]][pos[1]] = object;
         document.getElementById("r" + pos[0] + "l" + pos[1]).innerHTML = (Board.board[pos[0]][pos[1]].visual != "empty" ? "<img src='src/img/" + Board.board[pos[0]][pos[1]].visual + ".png' class='w-100'></img>" : "");
+    }
+
+    // Adding an apple in the board
+    static InfiniteAddApple(start = false) {
+        let intOne = Utility.getRandomInt(9);
+        let intTwo = Utility.getRandomInt(9);
+
+        if (start && intOne ===  0 && intTwo === 0) {
+            Board.canceled.push([intOne,intTwo]);
+            Board.InfiniteAddApple();
+            return
+        }
+
+        for (let i = 0; i < Board.canceled.length; i++) {
+            if (Board.canceled[i][0] === intOne && Board.canceled[i][1] === intTwo) {
+                Board.InfiniteAddApple();
+                return
+            }
+        }
+        if (Board.board[intOne][intTwo].property === "") {
+            Board.canceled = [];
+            Board.changeACaseContent([intOne, intTwo], new RecoltObject("lootable", true))
+            return
+        } else {
+            Board.canceled.push([intOne,intTwo]);
+            Board.InfiniteAddApple();
+            return
+        }
     }
 }

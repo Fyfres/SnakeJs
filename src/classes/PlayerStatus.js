@@ -8,6 +8,7 @@ class PlayerStatus {
     static currentRecoltedAppleCount = 0;
     static currentGameTotalApple = 0;
     static currentGameTotalBoost = 0;
+    static infiniteGame = false;
 
 
     // Change the display of the stats on the page.
@@ -46,6 +47,7 @@ class PlayerStatus {
             PlayerStatus.initPage();
             Board.emptyAllBoard();
             document.querySelector("#gameStarter").removeAttribute("disabled");
+            document.querySelector("#gameStarter2").removeAttribute("disabled");
             return true;
         }
     }
@@ -59,6 +61,7 @@ class PlayerStatus {
         PlayerStatus.initPage();
         Board.emptyAllBoard();
         document.querySelector("#gameStarter").removeAttribute("disabled");
+        document.querySelector("#gameStarter2").removeAttribute("disabled");
     }
 
 
@@ -68,8 +71,14 @@ class PlayerStatus {
             Utility.changeInnerHtml("#modalTitle", "Gagné !");
             Utility.changeInnerHtml("#modalDesc", "Bravo vous avez gagné votre partie de Snake!\nVous pouvez recommencez une partie au même niveau ou peut-être augmenter la difficulté ?");
         } else if (PlayerStatus.currentGameStatus === "lose") {
-            Utility.changeInnerHtml("#modalTitle", "Perdu !");
-            Utility.changeInnerHtml("#modalDesc", "Dommage vous avez perdu votre partie de Snake!\nVous pouvez recommencez une partie au même niveau ou peut-être diminuer la difficulté ?");
+            if (!PlayerStatus.infiniteGame) {
+                Utility.changeInnerHtml("#modalTitle", "Perdu !");
+                Utility.changeInnerHtml("#modalDesc", "Dommage vous avez perdu votre partie de Snake!\nVous pouvez recommencez une partie au même niveau ou peut-être diminuer la difficulté ?");
+            } else {
+                Utility.changeInnerHtml("#modalTitle", "Fini !");
+                Utility.changeInnerHtml("#modalDesc", "Votre partie de Snake est terminé !\nVous avez récolté " + PlayerStatus.currentRecoltedAppleCount + " pomme" + (PlayerStatus.currentRecoltedAppleCount > 1 ? "s" : "") + " bravo à vous !");
+            }
+
         } else {
             console.error("Error while checking the game status.");
             return;

@@ -9,11 +9,11 @@
 <body style="height:100vh">
     <div class="container-fluid">
         <div class="row mt-3">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 mx-auto">
                 <table>
                 </table>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 mx-auto text-center">
                 <label class="mt-5" for="difficulty">Choix de la difficulté</label>
                 <select name="difficulty" id="difficulty">
                     <option value="1">1</option>
@@ -27,9 +27,10 @@
                     <option value="9">9</option>
                     <option value="10">10</option>
                 </select>
-                <button class="btn btn-danger" onclick="Board.initBoard()" id="gameStarter">Démarrer le jeu</button>
+                <button class="btn btn-danger" onclick="PlayerStatus.infiniteGame = false; Board.initBoard()" id="gameStarter">Démarrer le jeu</button>
+                <button class="btn btn-danger" onclick="PlayerStatus.infiniteGame = true; Board.initBoardInfinite()" id="gameStarter2">Démarrer en infini</button>
 
-                <div class="w-75  bg-primary border border-dark rounded mt-4">
+                <div class="w-75 mx-auto bg-primary border border-dark rounded mt-4">
                     <div class="row">
                         <h3 class="col-8 mt-3">Nombre de parties joué:</h3><span id="gamePlayed" class="col-4 mt-4"></span>
                         <h3 class="col-8 mt-3">Nombre de parties gagné:</h3><span id="gameWin" class="col-4 mt-4"></span>

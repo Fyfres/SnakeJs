@@ -2,12 +2,15 @@ class Snake {
     static bodyQts = 0;
     static bodies = [];
     static snakeDirection = "right";
+    static infiniteRecolted = false;
+    static infiniteSpeed = 500;
 
     static init() {
         Snake.bodies = [];
         Snake.bodies.push(new Body("SnakeHead", true, "SnakeHead", true));
         let tempEvent = (e) => {
             if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "ArrowDown") {
+                    e.preventDefault();
                     Snake.step();
                 window.removeEventListener("keydown", tempEvent);
             }
@@ -20,12 +23,16 @@ class Snake {
     static direction() {
         let tempEvent = (e) => {
             if (e.key === "ArrowRight") {
+                e.preventDefault();
                 Snake.snakeDirection = "right";
             } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
                 Snake.snakeDirection = "left";
             } else if (e.key === "ArrowUp") {
+                e.preventDefault();
                 Snake.snakeDirection = "up";
             } else if (e.key === "ArrowDown") {
+                e.preventDefault();
                 Snake.snakeDirection = "down";
             }
         };
@@ -73,14 +80,27 @@ class Snake {
         let newPos = Board.board[Snake.bodies[0].partPos[0]][Snake.bodies[0].partPos[1]];
         if (newPos.property === "lootable") {
             if (newPos instanceof RecoltObject) {
-                console.log(newPos);
                 Board.emptyACase(Snake.bodies[0].partPos);
+
+                //Only useful for the infinite version
+                if (Snake.bodies.length >= 30) {
+                    for (let i = Snake.bodies.length-1; i > 0; i--) {
+                        Board.emptyACase(Snake.bodies[i].partPos);
+                        Snake.bodies.pop();
+                        Snake.bodyQts--;
+                    }
+                }
+                if (PlayerStatus.infiniteGame) {
+                    Snake.infiniteRecolted = true;
+                    Snake.infiniteSpeed += 0.5;
+                }
+
                 let body = new Body("SnakeBody", true, "SnakeBody", false);
                 Snake.bodies.push(body);
                 Snake.bodyQts++;
                 PlayerStatus.currentRecoltedAppleCount++;
                 Board.changeACaseContent(Snake.bodies[Snake.bodies.length-1].partPos, Snake.bodies[Snake.bodies.length-1]);
-                if(PlayerStatus.testWin()) {
+                if(!PlayerStatus.infiniteGame && PlayerStatus.testWin()) {
                     return;
                 }
             } else if (newPos instanceof Boost) {
@@ -101,9 +121,14 @@ class Snake {
             return;
         }
         Body.moveWholeBody();
+        if (Snake.infiniteRecolted) {
+            Board.InfiniteAddApple();
+            Snake.infiniteRecolted = false;
+            Snake.infiniteSpeed *= 0.95;
+        }
         setTimeout(()=>{
             Snake.step();
-        },500 - (PlayerStatus.winstreak > 24 ? 24 * 20 : PlayerStatus.winstreak * 20))
+        },(PlayerStatus.infiniteGame ? (Snake.infiniteSpeed) : (500 - (PlayerStatus.winstreak > 24 ? 24 * 20 : PlayerStatus.winstreak * 20))))
     }
 }
 
