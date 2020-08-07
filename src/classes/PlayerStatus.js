@@ -9,6 +9,8 @@ class PlayerStatus {
     static currentGameTotalApple = 0;
     static currentGameTotalBoost = 0;
     static infiniteGame = false;
+    static replay = [];
+    static replayState = 0;
 
 
     // Change the display of the stats on the page.

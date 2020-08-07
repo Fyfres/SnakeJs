@@ -57,7 +57,7 @@ class Board {
             }
         }
 
-        Board.InfiniteAddApple();
+        Board.InfiniteAddApple(true);
 
         Snake.init();
     }
@@ -124,12 +124,49 @@ class Board {
         }
         if (Board.board[intOne][intTwo].property === "") {
             Board.canceled = [];
-            Board.changeACaseContent([intOne, intTwo], new RecoltObject("lootable", true))
+            Board.changeACaseContent([intOne, intTwo], new RecoltObject("lootable", true));
             return
         } else {
             Board.canceled.push([intOne,intTwo]);
             Board.InfiniteAddApple();
             return
         }
+    }
+
+    static saveForReplay() {
+        let board = JSON.parse(JSON.stringify(Board.board));
+        console.log(board);
+        console.log(board);
+        PlayerStatus.replay.push({infinite: PlayerStatus.infiniteGame, board: board, speed: PlayerStatus.infiniteGame ? Snake.infiniteSpeed : PlayerStatus.winstreak});
+    }
+
+    static showReplay() {
+        document.querySelector("#gameStarter").setAttribute("disabled", "");
+        document.querySelector("#gameStarter2").setAttribute("disabled", "");
+        document.querySelector("#replayStarter").setAttribute("disabled", "");
+        Board.board = PlayerStatus.replay[PlayerStatus.replayState].board;
+
+        // Reinitialize the Board
+        document.getElementsByTagName("table")[0].innerHTML = "<tbody></tbody>";
+        for (let i = 0; i < 10; i++) {
+            // Create a new row
+            document.getElementsByTagName("tbody")[0].innerHTML = document.getElementsByTagName("tbody")[0].innerHTML + "<tr id='r"+i+"'></tr>";
+            for (let j = 0; j < 10; j++) {
+                document.getElementById("r"+i).innerHTML = document.getElementById("r"+i).innerHTML + "<td id='r"+ i + "l" + j + "' >" + (Board.board[i][j].visual != "empty" ? "<img src='src/img/" + Board.board[i][j].visual + ".png' class='w-100'></img>" : "") + "</td>";
+            }
+        }
+
+        setTimeout(() => {
+            if (PlayerStatus.replay.length-1 > PlayerStatus.replayState) {
+                PlayerStatus.replayState++;
+                Board.showReplay();
+            } else {
+                document.querySelector("#gameStarter").removeAttribute("disabled");
+                document.querySelector("#gameStarter2").removeAttribute("disabled");
+                document.querySelector("#replayStarter").removeAttribute("disabled");
+                PlayerStatus.initPage();
+                Board.emptyAllBoard();
+            }
+        }, PlayerStatus.replay[PlayerStatus.replayState].infinite ? (PlayerStatus.replay[PlayerStatus.replayState].speed) : (500 - (PlayerStatus.replay[PlayerStatus.replayState].speed > 24 ? 24 * 20 : PlayerStatus.replay[PlayerStatus.replayState].speed * 20)))
     }
 }

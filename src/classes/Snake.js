@@ -126,6 +126,7 @@ class Snake {
             Snake.infiniteRecolted = false;
             Snake.infiniteSpeed *= 0.95;
         }
+        Board.saveForReplay();
         setTimeout(()=>{
             Snake.step();
         },(PlayerStatus.infiniteGame ? (Snake.infiniteSpeed) : (500 - (PlayerStatus.winstreak > 24 ? 24 * 20 : PlayerStatus.winstreak * 20))))
