@@ -15,15 +15,14 @@ I'll create a proper download link when the game will be totally finished.
 
 ### Time on it
 
-Actually i've worked on it for 11h for the base game to be done  
-  -difficulty choosing  
-  -loosing when touching the walls or the snake body  
-  -winning when recolting every apples  
-  -length of the snake grow when getting an apple and shrink when getting a boost  
+Actually i've worked on it for 12h for the base game to be done  
+  - 2 Game Mode : Normal with diffictulty choosing & Unlimited where you play until you loose  
+  - Loosing when touching the walls or the snake body  
+  - Winning when recolting every apples on the standard mode  
+  - Length of the snake grow when getting an apple and shrink when getting a boost  
+  - Speed increase: When on a win streak for Normal mode or with every recolted apple for the Unlimited mode  
+  - Replay showing the last game played with the speed corresponding  
 
 ### Features to come
 
-I'm currently working on changing the snake speed when the player is on a win streak.  
-The more the player win the more the snake will speed up, it'll come back to it's normal speed once the player loose.  
-
-Next i'll work on an infinite mode where there'll be only one apple but each time the player the player get it another one will appear.
+No more features planned, i'll next work on an improve of the UI and add buttons to play with the screen (for phone users mostly).
