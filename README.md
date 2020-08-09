@@ -9,7 +9,7 @@ https://drive.google.com/drive/folders/1sNvVnglS_37FOFG3e5P-dk1sMBnjRxV9?usp=sha
 
 ### How to play
 
-1/ Download with the link above the folder SnakeJs
+1/ Download with the link above the folder SnakeJs  
 2/ Extract the ZIP wherever you want on your computer.  
 3/ Open the folder you just extracted.  
 4/ Open the game using the file "Snake.html".  
