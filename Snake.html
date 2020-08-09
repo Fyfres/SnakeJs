@@ -6,39 +6,170 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/main.css">
 </head>
-<body style="height:100vh">
-    <div class="container-fluid">
-        <div class="row mt-3">
-            <div class="col-12 col-md-6 mx-auto">
-                <table>
-                </table>
+<body style="height:100vh; overflow-x: hidden">
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+            <h1 class="navbar-brand">Snake</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link border-0" data-toggle="modal" data-target="#modalNormalGame">Partie Normale</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link border-0" data-toggle="modal" data-target="#modalInfiniteGame">Partie Infinie</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle border-0" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Statistiques de mes parties
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" border-0 data-toggle="modal" data-target="#modalNormalStats">Normale</a>
+                            <a class="dropdown-item border-0" data-toggle="modal" data-target="#modalInfiniteStats">Infinie</a>
+                            <a class="dropdown-item">Vous avez joué <span id="totalGamesPlayed"></span> parties au total.</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link gameStarter" onclick="Board.showReplay()">Rediffusion de ma partie</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-12 col-md-6 mx-auto text-center">
-                <label class="mt-5" for="difficulty">Choix de la difficulté</label>
-                <select name="difficulty" id="difficulty">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                <button class="btn btn-danger" onclick="PlayerStatus.infiniteGame = false; Board.initBoard()" id="gameStarter">Démarrer le jeu</button>
-                <button class="btn btn-danger" onclick="PlayerStatus.infiniteGame = true; Board.initBoardInfinite()" id="gameStarter2">Démarrer en infini</button>
-                <button class="btn btn-danger" onclick="Board.showReplay()" id="replayStarter">Revoir ma dernière partie</button>
-
-                <div class="w-75 mx-auto bg-primary border border-dark rounded mt-4">
-                    <div class="row">
-                        <h3 class="col-8 mt-3">Nombre de parties joué:</h3><span id="gamePlayed" class="col-4 mt-4"></span>
-                        <h3 class="col-8 mt-3">Nombre de parties gagné:</h3><span id="gameWin" class="col-4 mt-4"></span>
-                        <h3 class="col-8 mt-3">Nombre de parties gagné d'affilé:</h3><span id="winStreak" class="col-4 mt-4"></span>
-                        <h3 class="col-8 mt-3">Nombre de parties gagné d'affilé maximal:</h3><span id="winStreakMax" class="col-4 mt-4"></span>
-                    </div>
-
+        </nav>
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 mx-auto">
+                <table class="mx-auto">
+                    <tbody>
+                        <tr id="r0">
+                            <td id="r0l0"></td>
+                            <td id="r0l1"></td>
+                            <td id="r0l2"></td>
+                            <td id="r0l3"></td>
+                            <td id="r0l4"></td>
+                            <td id="r0l5"></td>
+                            <td id="r0l6"></td>
+                            <td id="r0l7"></td>
+                            <td id="r0l8"></td>
+                            <td id="r0l9"></td>
+                        </tr>
+                        <tr id="r1">
+                            <td id="r1l0"></td>
+                            <td id="r1l1"></td>
+                            <td id="r1l2"></td>
+                            <td id="r1l3"></td>
+                            <td id="r1l4"></td>
+                            <td id="r1l5"></td>
+                            <td id="r1l6"></td>
+                            <td id="r1l7"></td>
+                            <td id="r1l8"></td>
+                            <td id="r1l9"></td>
+                        </tr>
+                        <tr id="r2">
+                            <td id="r2l0"></td>
+                            <td id="r2l1"></td>
+                            <td id="r2l2"></td>
+                            <td id="r2l3"></td>
+                            <td id="r2l4"></td>
+                            <td id="r2l5"></td>
+                            <td id="r2l6"></td>
+                            <td id="r2l7"></td>
+                            <td id="r2l8"></td>
+                            <td id="r2l9"></td>
+                        </tr>
+                        <tr id="r3">
+                            <td id="r3l0"></td>
+                            <td id="r3l1"></td>
+                            <td id="r3l2"></td>
+                            <td id="r3l3"></td>
+                            <td id="r3l4"></td>
+                            <td id="r3l5"></td>
+                            <td id="r3l6"></td>
+                            <td id="r3l7"></td>
+                            <td id="r3l8"></td>
+                            <td id="r3l9"></td>
+                        </tr>
+                        <tr id="r4">
+                            <td id="r4l0"></td>
+                            <td id="r4l1"></td>
+                            <td id="r4l2"></td>
+                            <td id="r4l3"></td>
+                            <td id="r4l4"></td>
+                            <td id="r4l5"></td>
+                            <td id="r4l6"></td>
+                            <td id="r4l7"></td>
+                            <td id="r4l8"></td>
+                            <td id="r4l9"></td>
+                        </tr>
+                        <tr id="r5">
+                            <td id="r5l0"></td>
+                            <td id="r5l1"></td>
+                            <td id="r5l2"></td>
+                            <td id="r5l3"></td>
+                            <td id="r5l4"></td>
+                            <td id="r5l5"></td>
+                            <td id="r5l6"></td>
+                            <td id="r5l7"></td>
+                            <td id="r5l8"></td>
+                            <td id="r5l9"></td>
+                        </tr>
+                        <tr id="r6">
+                            <td id="r6l0"></td>
+                            <td id="r6l1"></td>
+                            <td id="r6l2"></td>
+                            <td id="r6l3"></td>
+                            <td id="r6l4"></td>
+                            <td id="r6l5"></td>
+                            <td id="r6l6"></td>
+                            <td id="r6l7"></td>
+                            <td id="r6l8"></td>
+                            <td id="r6l9"></td>
+                        </tr>
+                        <tr id="r7">
+                            <td id="r7l0"></td>
+                            <td id="r7l1"></td>
+                            <td id="r7l2"></td>
+                            <td id="r7l3"></td>
+                            <td id="r7l4"></td>
+                            <td id="r7l5"></td>
+                            <td id="r7l6"></td>
+                            <td id="r7l7"></td>
+                            <td id="r7l8"></td>
+                            <td id="r7l9"></td>
+                        </tr>
+                        <tr id="r8">
+                            <td id="r8l0"></td>
+                            <td id="r8l1"></td>
+                            <td id="r8l2"></td>
+                            <td id="r8l3"></td>
+                            <td id="r8l4"></td>
+                            <td id="r8l5"></td>
+                            <td id="r8l6"></td>
+                            <td id="r8l7"></td>
+                            <td id="r8l8"></td>
+                            <td id="r8l9"></td>
+                        </tr>
+                        <tr id="r9">
+                            <td id="r9l0"></td>
+                            <td id="r9l1"></td>
+                            <td id="r9l2"></td>
+                            <td id="r9l3"></td>
+                            <td id="r9l4"></td>
+                            <td id="r9l5"></td>
+                            <td id="r9l6"></td>
+                            <td id="r9l7"></td>
+                            <td id="r9l8"></td>
+                            <td id="r9l9"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row mt-5 mb-2">
+                    <button class="btn btn-primary mx-auto p-4" id="up">^</button>
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary ml-auto p-4" id="left"><</button>
+                    <button class="btn btn-primary mr-2 ml-2 p-4" id="down">v</button>
+                    <button class="btn btn-primary mr-auto p-4" id="right">></button>
                 </div>
             </div>
         </div>
@@ -46,7 +177,7 @@
 
 
 
-    <div class="modal fade" id="modalGameEnd" tabindex="-1" role="dialog" aria-labelledby="EndOfTheGameModal" aria-hidden="true">
+    <div class="modal fade" id="modalGameEnd" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -57,6 +188,127 @@
                 </div>
                 <div class="modal-body">
                     <p id="modalDesc"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger gameStarter" onclick="Board.changeDiff('less'); Board.initBoard()">Niveau précédant</button>
+                    <button type="button" class="btn btn-danger gameStarter" onclick="Board.initBoard()">Rejouer ce niveau</button>
+                    <button type="button" class="btn btn-danger gameStarter" onclick="Board.changeDiff('more'); Board.initBoard()">Niveau suivant</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInfiniteGameEnd" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalInfiniteTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalInfiniteDesc"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger gameStarter" onclick="Board.initBoardInfinite()">Rejouer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalNormalGame" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNormalGameTitle">Partie Normale</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalNormalGameDesc">Dans ce mode de jeu vous choisissez une difficultée et devez récolter toutes les pommes sans toucher votre corps où les murs.
+
+                    </p>
+                    <label class="mt-5" for="difficulty">Choix de la difficulté</label>
+                    <select name="difficulty" id="difficulty" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger gameStarter" onclick="PlayerStatus.infiniteGame = false; Board.initBoard()">Lancer la partie</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInfiniteGame" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalInfiniteGameTitle">Partie Infinie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalInfiniteGameDesc">Dans ce mode de jeu les pommes apparaissent les une après les autres, votre vitesse augmente au fur et à mesure de la partie. La partie s'arrête uniquement lorsque vous perdez vous devez battre votre score de pommes ramassez !</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger gameStarter" onclick="Board.initBoardInfinite()">Lancer la partie</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalNormalStats" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNormalStatsTitle">Statistiques de parties Normale</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Nombre de parties : <span id="normalGamesPlayed"></span></p>
+                    <p>Nombre de parties gagné au total : <span id="winnedGames"></span></p>
+                    <p>Nombre de parties gagné d'affilé : <span id="winStreak"></span></p>
+                    <p>Plus grand nombre de parties gagné d'affilé : <span id="bestWinStreak"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInfiniteStats" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalInfiniteStatsTitle">Statistiques de parties Infinie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Nombre de parties : <span id="infiniteGamesPlayed"></span></p>
+                    <p>Plus grand nombre de pommes récupéré dans une partie : <span id="infiniteMaxRecoltedApple"></span></p>
+                    <p>Nombre total de pomme récupéré : <span id="infiniteTotalRecoltedApple"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -77,6 +329,6 @@
     <script src="src/classes/RecoltObject.js"></script>
     <script src="src/classes/Snake.js"></script>
     <script src="src/classes/Board.js"></script>
-    <script>PlayerStatus.initPage()</script>
+    <script>PlayerStatus.getAllCookies();PlayerStatus.initPage()</script>
 </body>
 </html>
