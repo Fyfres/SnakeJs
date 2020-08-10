@@ -5,7 +5,7 @@ This is a Snake that i'm trying to do the most quickly possible
 
 ## DOWNLOAD
 
-https://drive.google.com/drive/folders/1sNvVnglS_37FOFG3e5P-dk1sMBnjRxV9?usp=sharing
+https://docs.google.com/uc?export=download&id=1gN7JLrPEyTxcq3lTAo-TUmN75yHmoo6y
 
 ### How to play
 
