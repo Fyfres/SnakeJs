@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="shortcut icon" href="src/img/Icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/main.css">
 </head>
@@ -26,9 +27,9 @@
                             Statistiques de mes parties
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" border-0 data-toggle="modal" data-target="#modalNormalStats">Normale</a>
+                            <a class="dropdown-item border-0"  data-toggle="modal" data-target="#modalNormalStats">Normale</a>
                             <a class="dropdown-item border-0" data-toggle="modal" data-target="#modalInfiniteStats">Infinie</a>
-                            <a class="dropdown-item">Vous avez joué <span id="totalGamesPlayed"></span> parties au total.</a>
+                            <a class="dropdown-item disabled">Vous avez joué <span id="totalGamesPlayed"></span> parties au total.</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -37,7 +38,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="row mt-5">
+        <div class="row mt-3">
             <div class="col-12 col-md-6 mx-auto">
                 <table class="mx-auto">
                     <tbody>
@@ -229,7 +230,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="modalNormalGameDesc">Dans ce mode de jeu vous choisissez une difficultée et devez récolter toutes les pommes sans toucher votre corps où les murs.
+                    <p id="modalNormalGameDesc">Dans ce mode de jeu vous choisissez une difficultée et devez récolter toutes les pommes sans toucher votre corps ou les murs.
 
                     </p>
                     <label class="mt-5" for="difficulty">Choix de la difficulté</label>
@@ -264,7 +265,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="modalInfiniteGameDesc">Dans ce mode de jeu les pommes apparaissent les une après les autres, votre vitesse augmente au fur et à mesure de la partie. La partie s'arrête uniquement lorsque vous perdez vous devez battre votre score de pommes ramassez !</p>
+                    <p id="modalInfiniteGameDesc">Dans ce mode de jeu les pommes apparaissent les une après les autres, votre vitesse augmente au fur et à mesure de la partie. La partie s'arrête uniquement lorsque vous perdez vous devez battre votre score de pommes ramassées !</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger gameStarter" onclick="Board.initBoardInfinite()">Lancer la partie</button>
