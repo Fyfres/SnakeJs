@@ -7,12 +7,17 @@ This is a Snake that i'm trying to do the most quickly possible
 
 [Click Here !](https://docs.google.com/uc?export=download&id=1gN7JLrPEyTxcq3lTAo-TUmN75yHmoo6y)
 
-### How to play
+### How to use
 
 1/ Download with the link above the folder SnakeJs  
 2/ Extract the ZIP wherever you want on your computer.  
 3/ Open the folder you just extracted.  
 4/ Open the game using the file "Snake.html".  
+
+OR
+
+You can go on the online version, just by clicking this link :
+https://devwebaupif.000webhostapp.com/MiniGames/Snake/
 
 
 ### Time on it
