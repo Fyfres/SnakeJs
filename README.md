@@ -16,7 +16,7 @@ This is a Snake that i'm trying to do the most quickly possible
 
 OR
 
-You can go on the online version, just by clicking this link (Temporary down):  
+You can go on the online version, just by clicking this link :  
 https://devwebaupif.000webhostapp.com/MiniGames/Snake/
 
 
